@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.CalendarSceneController">
+   <children>
+      <HBox>
+         <children>
+            <TextField fx:id="courseCodeField" promptText="Kurskod ">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+            </TextField>
+            <Button fx:id="getButton" mnemonicParsing="false" onAction="#getCalendarList" text="Hämta">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      <HBox>
+         <children>
+            <ListView fx:id="calendarList" onMouseClicked="#displaySelected" prefHeight="424.0" prefWidth="300.0">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+            </ListView>
+            <VBox prefHeight="328.0" prefWidth="305.0">
+               <children>
+                  <HBox>
+                     <children>
+                        <Label minWidth="80.0" text="Lokal">
+                           <HBox.margin>
+                              <Insets bottom="3.0" left="3.0" right="3.0" top="6.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="lokalField">
+                           <HBox.margin>
+                              <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label minWidth="80.0" text="Lärare">
+                           <HBox.margin>
+                              <Insets bottom="3.0" left="3.0" right="3.0" top="6.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="larareField">
+                           <HBox.margin>
+                              <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label minWidth="80.0" text="Aktivitet">
+                           <HBox.margin>
+                              <Insets bottom="3.0" left="3.0" right="3.0" top="6.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="aktivitetField">
+                           <HBox.margin>
+                              <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label minWidth="80.0" text="Kurs">
+                           <HBox.margin>
+                              <Insets bottom="3.0" left="3.0" right="3.0" top="6.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="kursField">
+                           <HBox.margin>
+                              <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label minWidth="80.0" text="Campus">
+                           <HBox.margin>
+                              <Insets bottom="3.0" left="3.0" right="3.0" top="6.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="campusField">
+                           <HBox.margin>
+                              <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label minWidth="80.0" text="Text">
+                           <HBox.margin>
+                              <Insets bottom="3.0" left="3.0" right="3.0" top="6.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="textField1">
+                           <HBox.margin>
+                              <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label minWidth="80.0" text="Text">
+                           <HBox.margin>
+                              <Insets bottom="3.0" left="3.0" right="3.0" top="6.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="textField2">
+                           <HBox.margin>
+                              <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label minWidth="80.0" text="Syfte">
+                           <HBox.margin>
+                              <Insets bottom="3.0" left="3.0" right="3.0" top="6.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="syfteField">
+                           <HBox.margin>
+                              <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label minWidth="80.0" text="Kurs/Program">
+                           <HBox.margin>
+                              <Insets bottom="3.0" left="3.0" right="3.0" top="6.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="kursProgramField">
+                           <HBox.margin>
+                              <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label minWidth="80.0" text="Kund">
+                           <HBox.margin>
+                              <Insets bottom="3.0" left="3.0" right="3.0" top="6.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="kundField">
+                           <HBox.margin>
+                              <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label minWidth="80.0" text="Utrustning">
+                           <HBox.margin>
+                              <Insets bottom="3.0" left="3.0" right="3.0" top="6.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="utrustningField">
+                           <HBox.margin>
+                              <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox>
+         <children>
+            <Button fx:id="backButton" mnemonicParsing="false" onAction="#backToStart" text="Tillbaka">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveEvent" text="Spara">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</VBox>

@@ -40,7 +40,7 @@
                               <Insets bottom="3.0" left="3.0" right="3.0" top="6.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="lokalField">
+                        <TextField fx:id="lokalField" onKeyReleased="#onEditSpecs">
                            <HBox.margin>
                               <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                            </HBox.margin>
@@ -54,7 +54,7 @@
                               <Insets bottom="3.0" left="3.0" right="3.0" top="6.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="larareField">
+                        <TextField fx:id="larareField" onKeyReleased="#onEditSpecs">
                            <HBox.margin>
                               <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                            </HBox.margin>
@@ -68,7 +68,7 @@
                               <Insets bottom="3.0" left="3.0" right="3.0" top="6.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="aktivitetField">
+                        <TextField fx:id="aktivitetField" onKeyReleased="#onEditSpecs">
                            <HBox.margin>
                               <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                            </HBox.margin>
@@ -82,7 +82,7 @@
                               <Insets bottom="3.0" left="3.0" right="3.0" top="6.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="kursField">
+                        <TextField fx:id="kursField" onKeyReleased="#onEditSpecs">
                            <HBox.margin>
                               <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                            </HBox.margin>
@@ -96,7 +96,7 @@
                               <Insets bottom="3.0" left="3.0" right="3.0" top="6.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="campusField">
+                        <TextField fx:id="campusField" onKeyReleased="#onEditSpecs">
                            <HBox.margin>
                               <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                            </HBox.margin>
@@ -110,7 +110,7 @@
                               <Insets bottom="3.0" left="3.0" right="3.0" top="6.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="textField1">
+                        <TextField fx:id="textField1" onKeyReleased="#onEditSpecs">
                            <HBox.margin>
                               <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                            </HBox.margin>
@@ -124,7 +124,7 @@
                               <Insets bottom="3.0" left="3.0" right="3.0" top="6.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="textField2">
+                        <TextField fx:id="textField2" onKeyReleased="#onEditSpecs">
                            <HBox.margin>
                               <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                            </HBox.margin>
@@ -138,7 +138,7 @@
                               <Insets bottom="3.0" left="3.0" right="3.0" top="6.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="syfteField">
+                        <TextField fx:id="syfteField" onKeyReleased="#onEditSpecs">
                            <HBox.margin>
                               <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                            </HBox.margin>
@@ -152,7 +152,7 @@
                               <Insets bottom="3.0" left="3.0" right="3.0" top="6.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="kursProgramField">
+                        <TextField fx:id="kursProgramField" onKeyReleased="#onEditSpecs">
                            <HBox.margin>
                               <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                            </HBox.margin>
@@ -166,7 +166,7 @@
                               <Insets bottom="3.0" left="3.0" right="3.0" top="6.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="kundField">
+                        <TextField fx:id="kundField" onKeyReleased="#onEditSpecs">
                            <HBox.margin>
                               <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                            </HBox.margin>
@@ -180,7 +180,7 @@
                               <Insets bottom="3.0" left="3.0" right="3.0" top="6.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="utrustningField">
+                        <TextField fx:id="utrustningField" onKeyReleased="#onEditSpecs">
                            <HBox.margin>
                               <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                            </HBox.margin>

@@ -5,12 +5,14 @@
  */
 package View;
 
-import RESTController.RESTConnection;
+import RESTController.RESTConnectionTimeEdit;
 import Model.Reservation;
 import Model.ReservationContainer;
+import RESTController.RESTConnectionCanvas;
 import javafx.scene.input.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -27,6 +29,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 /**
@@ -36,7 +40,8 @@ import javafx.stage.Stage;
  */
 public class CalendarSceneController implements Initializable {
     private ReservationContainer rc;
-    private RESTConnection con;
+    private RESTConnectionTimeEdit conTimeEdit;
+    private RESTConnectionCanvas conCanvas = new RESTConnectionCanvas();;
     ObservableList courseList = FXCollections.observableArrayList();
     
     @FXML
@@ -84,8 +89,8 @@ public class CalendarSceneController implements Initializable {
     @FXML
     public void getCalendarList(ActionEvent event){
         try {
-            con = new RESTConnection(courseCodeField.getText());
-             rc = con.getAllAsJson(); 
+            conTimeEdit = new RESTConnectionTimeEdit(courseCodeField.getText());
+             rc = conTimeEdit.getAllAsJson(); 
              loadCourseData(rc);   
         } catch (Exception ex) {
             Alert alert = new Alert(AlertType.ERROR);
@@ -130,7 +135,7 @@ public class CalendarSceneController implements Initializable {
             }catch(Exception e){     
             }
     }
-     
+  
     private void clearAllFields(){
            lokalField.clear();
             larareField.clear();
@@ -146,8 +151,17 @@ public class CalendarSceneController implements Initializable {
             utrustningField.clear();
     }
     
-     @FXML
+    @FXML
     private void saveEvent(ActionEvent event) {
+        //2020-12-10T20:00:00Z
+        for(Reservation res: rc.getReservations()){
+            int status = conCanvas.postCaldendar(
+                    "user_72164", 
+                    res.getAktivitet(), 
+                    res.getStartdate() + "T" + res.getStarttime() + "Z", 
+                    res.getEnddate() + "T" + res.getEndtime() + "Z");
+            System.out.println(status);        
+       }
     }
     
     /**
@@ -157,4 +171,25 @@ public class CalendarSceneController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     } 
+
+    @FXML
+    private void onEditSpecs(KeyEvent event) {
+        List<String> specs = new ArrayList(); 
+            specs.add("");
+            specs.add(lokalField.getText());
+            specs.add(larareField.getText());
+            specs.add(aktivitetField.getText());
+            specs.add("");
+            specs.add(kursField.getText());
+            specs.add( campusField.getText());
+            specs.add(textField1.getText());
+            specs.add( textField2.getText());
+            specs.add(syfteField.getText());
+            specs.add(kursProgramField.getText());
+            specs.add(kundField.getText());
+            specs.add(utrustningField.getText());
+            
+            int index = calendarList.getSelectionModel().getSelectedIndex();
+            rc.getReservationByIndex(index).setColumns(specs);
+    }
 }

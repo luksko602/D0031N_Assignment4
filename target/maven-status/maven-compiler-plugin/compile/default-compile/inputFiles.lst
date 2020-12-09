@@ -1,7 +1,8 @@
 C:\Users\Lukas\Documents\NetBeansProjects\JMSTest\src\main\java\View\CalendarSceneController.java
 C:\Users\Lukas\Documents\NetBeansProjects\JMSTest\src\main\java\Model\Reservation.java
 C:\Users\Lukas\Documents\NetBeansProjects\JMSTest\src\main\java\Model\ReservationContainer.java
-C:\Users\Lukas\Documents\NetBeansProjects\JMSTest\src\main\java\RESTController\RESTConnection.java
+C:\Users\Lukas\Documents\NetBeansProjects\JMSTest\src\main\java\RESTController\RESTConnectionTimeEdit.java
+C:\Users\Lukas\Documents\NetBeansProjects\JMSTest\src\main\java\RESTController\RESTConnectionCanvas.java
 C:\Users\Lukas\Documents\NetBeansProjects\JMSTest\src\main\java\MessageController\JmsAmqManager.java
 C:\Users\Lukas\Documents\NetBeansProjects\JMSTest\src\main\java\View\MainApp.java
 C:\Users\Lukas\Documents\NetBeansProjects\JMSTest\src\main\java\View\FXMLController.java

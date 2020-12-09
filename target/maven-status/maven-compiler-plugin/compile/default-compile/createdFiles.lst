@@ -1,7 +1,8 @@
 MessageController\JmsAmqManager.class
 View\CalendarSceneController.class
-RESTController\RESTConnection.class
 View\FXMLController.class
 Model\Reservation.class
+RESTController\RESTConnectionTimeEdit.class
+RESTController\RESTConnectionCanvas.class
 Model\ReservationContainer.class
 View\MainApp.class

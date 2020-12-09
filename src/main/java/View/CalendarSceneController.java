@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,11 +28,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 /**
  * FXML Controller class
@@ -72,6 +78,11 @@ public class CalendarSceneController implements Initializable {
     private Button backButton;
     
     @FXML
+    private DatePicker startDate;
+    @FXML
+    private DatePicker endDate;
+    
+    @FXML
     private Button getButton;
     @FXML
     private Button saveButton;
@@ -89,7 +100,10 @@ public class CalendarSceneController implements Initializable {
     @FXML
     public void getCalendarList(ActionEvent event){
         try {
-            conTimeEdit = new RESTConnectionTimeEdit(courseCodeField.getText());
+            conTimeEdit = new RESTConnectionTimeEdit(courseCodeField.getText()
+            ,startDate.getValue().toString().replaceAll("-", "")
+            ,endDate.getValue().toString().replaceAll("-", "")
+            );
              rc = conTimeEdit.getAllAsJson(); 
              loadCourseData(rc);   
         } catch (Exception ex) {
@@ -136,11 +150,10 @@ public class CalendarSceneController implements Initializable {
             }
     }
   
-    private void clearAllFields(){
-           lokalField.clear();
+    private void clearAllFields(){  
+            lokalField.clear();
             larareField.clear();
             aktivitetField.clear();
-            //4an är tom
             kursField.clear();
             campusField.clear();
             textField1.clear();
@@ -153,14 +166,41 @@ public class CalendarSceneController implements Initializable {
     
     @FXML
     private void saveEvent(ActionEvent event) {
-        //2020-12-10T20:00:00Z
-        for(Reservation res: rc.getReservations()){
-            int status = conCanvas.postCaldendar(
-                    "user_72164", 
-                    res.getAktivitet(), 
-                    res.getStartdate() + "T" + res.getStarttime() + "Z", 
-                    res.getEnddate() + "T" + res.getEndtime() + "Z");
-            System.out.println(status);        
+ 
+        TextInputDialog dialog = new TextInputDialog("72164");
+        dialog.setTitle("Push till Canvas");
+        dialog.setHeaderText("Vilken kurs vill du pusha till:");
+        dialog.setContentText("Kurs:");
+        dialog.setGraphic(null);
+        Optional<String> result = dialog.showAndWait();
+        TextField input = dialog.getEditor();
+        
+        
+        if(input.getText() != null && input.getText().toString().length() !=0){
+            ObservableList selected = calendarList.getSelectionModel().getSelectedIndices();
+            List<Reservation> success = new ArrayList();
+            for(Object i: selected){
+                Reservation res = rc.getReservationByIndex((int) i);
+                int status = conCanvas.postCaldendar(
+                        //Lukas = 72164
+                        "user_" + input.getText().toString(), 
+                        res.getAktivitet(), 
+                        res.getStartdate() + "T" + res.getStarttime() + "Z", 
+                        res.getEnddate() + "T" + res.getEndtime() + "Z",
+                        lokalField.getText(),
+                        campusField.getText(),
+                        textField1.getText() + " " + textField2.getText()
+                );
+                if (status==201){
+                    System.out.println("Event pushat");
+                }   
+        }
+        }else{      
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Varning");
+            alert.setHeaderText("Något blev fel!");
+            alert.setContentText("Fel vid inmatning. Vänligen försök igen.");
+            alert.showAndWait();
        }
     }
     
@@ -169,7 +209,7 @@ public class CalendarSceneController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+          calendarList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     } 
 
     @FXML
@@ -181,9 +221,9 @@ public class CalendarSceneController implements Initializable {
             specs.add(aktivitetField.getText());
             specs.add("");
             specs.add(kursField.getText());
-            specs.add( campusField.getText());
+            specs.add(campusField.getText());
             specs.add(textField1.getText());
-            specs.add( textField2.getText());
+            specs.add(textField2.getText());
             specs.add(syfteField.getText());
             specs.add(kursProgramField.getText());
             specs.add(kundField.getText());

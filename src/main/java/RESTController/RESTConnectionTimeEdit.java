@@ -26,8 +26,8 @@ public class RESTConnectionTimeEdit {
     private static final Client CLIENT = ClientBuilder.newClient();
     private static WebTarget timeEditService; 
     
-    public RESTConnectionTimeEdit(String uri) throws Exception{
-        timeEditService = CLIENT.target(getBaseURI(uri));
+    public RESTConnectionTimeEdit(String uri, String startDate, String endDate) throws Exception{
+        timeEditService = CLIENT.target(getBaseURI(uri, startDate, endDate));
     }
     
     public static String getResponse(String searchID){
@@ -55,15 +55,20 @@ public class RESTConnectionTimeEdit {
          return rc;
     }
     
-    public static URI getBaseURI(String course) throws Exception{
-        // return UriBuilder.fromUri("https://jsonplaceholder.typicode.com/users").build();
+    public static URI getBaseURI(String course, String startDate, String endDate) throws Exception{
         switch (course) {
             case "D0019N":
-                return UriBuilder.fromUri("https://cloud.timeedit.net/ltu/web/schedule1/ri176XQ2770Z5YQv250131Z6yQY750173YX5Y7gQ9076757.json").build();
+                return UriBuilder.fromUri("https://cloud.timeedit.net/ltu/web/schedule1/ri.json?h=t&sid=3&p=" + startDate + 
+                        ".x,"+ endDate + ".x&objects=133676.28&ox=0&types=0&fe=0").build();
+                //133676
             case "D0023E":
-                return UriBuilder.fromUri("https://cloud.timeedit.net/ltu/web/schedule1/ri177XQQ770Z50Qv8Q013gZ6y5Y750476Y75Y.json").build();
-            case "I0006N":
-                return UriBuilder.fromUri("https://cloud.timeedit.net/ltu/web/schedule1/ri176XQ9770Z5YQv950131Z6yQY750173YX5Y7gQ2076757.json").build();
+                return UriBuilder.fromUri("https://cloud.timeedit.net/ltu/web/schedule1/ri.json?h=t&sid=3&p=" + startDate + 
+                        ".x,"+ endDate + ".x&objects=133650.28&ox=0&types=0&fe=0").build();
+                //133650
+            case "D0031N":
+                return UriBuilder.fromUri("https://cloud.timeedit.net/ltu/web/schedule1/ri.json?h=t&sid=3&p=" + startDate + 
+                        ".x,"+ endDate + ".x&objects=132868.28&ox=0&types=0&fe=0").build();
+                //132868
             default:
                 throw new Exception("Course not found");
         }

@@ -24,12 +24,16 @@ public class RESTConnectionCanvas {
     private static final WebTarget canvasService = CLIENT.target(getBaseURI());
     
     
-       public int postCaldendar(String context_code, String title, String start_at, String end_at){
+       public int postCaldendar(String context_code, String title, String start_at, String end_at,
+               String locationName, String locationAddress, String description){
         Form form = new Form();
         form.param("calendar_event[context_code]",context_code);
         form.param("calendar_event[title]",title);
         form.param("calendar_event[start_at]",start_at);
         form.param("calendar_event[end_at]",end_at);
+        form.param("calendar_event[location_name]",locationName);
+        form.param("calendar_event[location_address]",locationAddress);
+        form.param("calendar_event[description]",description);
 
         Response response = canvasService
                 .request().header("Authorization", "Bearer 3755~QKRX29HtPZBcTFpVPpheg0x6mUxkspGHpfiOrCfPFv5XdfHiK6DLdB1COP3wZdiW")
@@ -38,7 +42,6 @@ public class RESTConnectionCanvas {
      }
     
     public static URI getBaseURI(){
-       // return UriBuilder.fromUri("https://jsonplaceholder.typicode.com/users").build();
         return UriBuilder.fromUri("https://ltu.instructure.com/api/v1/calendar_events.json").build();
        
     }

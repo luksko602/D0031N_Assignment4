@@ -1,3 +1,26 @@
-.button {
-    -fx-font-weight: bold;
+.root{
+    -fx-font-size: 10pt;
+    -fx-font-family: "monospace";
+    -fx-base: rgb(135,206,250);
 }
+.button{
+    -fx-base: rgb(176,196,222);
+}
+.date-picker{
+    -fx-base: rgb(176,196,222);
+}
+.label{
+    -fx-font-size: 10pt;
+    
+}
+.dialog-pane{
+    -fx-font-size: 10pt;
+    -fx-font-family: "monospace";
+    -fx-base: rgb(135,206,250);
+}
+.myDialog{
+    -fx-font-size: 10pt;
+    -fx-font-family: "monospace";
+    -fx-base: rgb(135,206,250);
+}
+

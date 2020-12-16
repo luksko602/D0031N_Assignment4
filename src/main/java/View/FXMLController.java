@@ -21,39 +21,27 @@ public class FXMLController implements Initializable {
     private TextField messageTextField;
     @FXML
     private TextField queueTextField;
-    @FXML
-    private TextArea textArea;
     
     @FXML
     public void sendButtonAction(ActionEvent event) {
-     try{
+   /*  try{
         new JmsAmqManager().produce(queueTextField.getText(), messageTextField.getText());
         queueTextField.setText("");
         messageTextField.setText("");
      }catch(Exception e){
          System.out.println(e);
-     }
+     }*/
     }
     
     @FXML
     public void getButtonAction(ActionEvent event){
-        try{
+  /*      try{
             String message = new JmsAmqManager().consume(queueTextField.getText());
             messageTextField.setText(message);
             queueTextField.setText("");
         }catch(Exception e){
             System.out.println(e);
-        }
-    }
-    
-    @FXML
-    public void startListener(ActionEvent event){
-        try{
-            JmsAmqManager jmsm = new JmsAmqManager();
-            jmsm.autoConsume(queueTextField.getText());
-        }catch(Exception e){
-            System.out.println(e);
-        }
+        }*/
     }
     
     @FXML

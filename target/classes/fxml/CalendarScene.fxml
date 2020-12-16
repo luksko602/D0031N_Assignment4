@@ -9,33 +9,69 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.CalendarSceneController">
+<VBox prefHeight="481.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.CalendarSceneController">
    <children>
       <HBox>
          <children>
-            <TextField fx:id="courseCodeField" promptText="Kurskod ">
-               <HBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </HBox.margin>
-            </TextField>
-            <DatePicker fx:id="startDate">
-               <HBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </HBox.margin>
-            </DatePicker>
-            <DatePicker fx:id="endDate">
-               <HBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </HBox.margin>
-            </DatePicker>
-            <Button fx:id="getButton" mnemonicParsing="false" onAction="#getCalendarList" text="Hämta">
-               <HBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </HBox.margin>
-            </Button>
+            <VBox>
+               <children>
+                  <Label text="Kurskod">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="courseCodeField" promptText="Kurskod ">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                     </VBox.margin>
+                  </TextField>
+               </children>
+            </VBox>
+            <VBox>
+               <children>
+                  <Label text="Startdatum">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <DatePicker fx:id="startDate">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                     </VBox.margin>
+                  </DatePicker>
+               </children>
+            </VBox>
+            <VBox>
+               <children>
+                  <Label text="Slutdatum">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <DatePicker fx:id="endDate">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                     </VBox.margin>
+                  </DatePicker>
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Button fx:id="getButton" mnemonicParsing="false" onAction="#getCalendarList" text="Hämta">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
          </children>
       </HBox>
-      <HBox prefHeight="375.0" prefWidth="600.0">
+      <HBox>
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="329.0" prefWidth="300.0">
                <children>
@@ -47,7 +83,7 @@
                   <ListView fx:id="calendarList" accessibleRole="CHECK_BOX" onMouseClicked="#displaySelected" prefHeight="346.0" prefWidth="316.0" />
                </children>
             </VBox>
-            <VBox alignment="TOP_CENTER" prefHeight="328.0" prefWidth="300.0">
+            <VBox alignment="TOP_CENTER" prefHeight="328.0" prefWidth="450.0">
                <children>
                   <Label contentDisplay="CENTER" text="Information">
                      <VBox.margin>
@@ -56,12 +92,12 @@
                   </Label>
                   <HBox>
                      <children>
-                        <Label minWidth="80.0" text="Lokal">
+                        <Label minWidth="100.0" text="Lokal">
                            <HBox.margin>
                               <Insets bottom="3.0" left="3.0" right="3.0" top="6.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="lokalField" onKeyReleased="#onEditSpecs">
+                        <TextField fx:id="lokalField" onKeyReleased="#onEditSpecs" prefWidth="250.0">
                            <HBox.margin>
                               <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                            </HBox.margin>
@@ -70,12 +106,12 @@
                   </HBox>
                   <HBox>
                      <children>
-                        <Label minWidth="80.0" text="Lärare">
+                        <Label minWidth="100.0" text="Lärare">
                            <HBox.margin>
                               <Insets bottom="3.0" left="3.0" right="3.0" top="6.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="larareField" onKeyReleased="#onEditSpecs">
+                        <TextField fx:id="larareField" onKeyReleased="#onEditSpecs" prefWidth="250.0">
                            <HBox.margin>
                               <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                            </HBox.margin>
@@ -84,12 +120,12 @@
                   </HBox>
                   <HBox>
                      <children>
-                        <Label minWidth="80.0" text="Aktivitet">
+                        <Label minWidth="100.0" text="Aktivitet">
                            <HBox.margin>
                               <Insets bottom="3.0" left="3.0" right="3.0" top="6.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="aktivitetField" onKeyReleased="#onEditSpecs">
+                        <TextField fx:id="aktivitetField" onKeyReleased="#onEditSpecs" prefWidth="250.0">
                            <HBox.margin>
                               <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                            </HBox.margin>
@@ -98,12 +134,26 @@
                   </HBox>
                   <HBox>
                      <children>
-                        <Label minWidth="80.0" text="Kurs">
+                        <Label minWidth="100.0" text="Kurs">
                            <HBox.margin>
                               <Insets bottom="3.0" left="3.0" right="3.0" top="6.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="kursField" onKeyReleased="#onEditSpecs">
+                        <TextField fx:id="kursField" onKeyReleased="#onEditSpecs" prefWidth="250.0">
+                           <HBox.margin>
+                              <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox prefWidth="273.0">
+                     <children>
+                        <Label minWidth="100.0" text="Campus">
+                           <HBox.margin>
+                              <Insets bottom="3.0" left="3.0" right="3.0" top="6.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="campusField" onKeyReleased="#onEditSpecs" prefWidth="250.0">
                            <HBox.margin>
                               <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                            </HBox.margin>
@@ -112,12 +162,12 @@
                   </HBox>
                   <HBox>
                      <children>
-                        <Label minWidth="80.0" text="Campus">
+                        <Label minWidth="100.0" text="Text">
                            <HBox.margin>
                               <Insets bottom="3.0" left="3.0" right="3.0" top="6.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="campusField" onKeyReleased="#onEditSpecs">
+                        <TextField fx:id="textField1" onKeyReleased="#onEditSpecs" prefWidth="250.0">
                            <HBox.margin>
                               <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                            </HBox.margin>
@@ -126,12 +176,12 @@
                   </HBox>
                   <HBox>
                      <children>
-                        <Label minWidth="80.0" text="Text">
+                        <Label minWidth="100.0" text="Text">
                            <HBox.margin>
                               <Insets bottom="3.0" left="3.0" right="3.0" top="6.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="textField1" onKeyReleased="#onEditSpecs">
+                        <TextField fx:id="textField2" onKeyReleased="#onEditSpecs" prefWidth="250.0">
                            <HBox.margin>
                               <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                            </HBox.margin>
@@ -140,12 +190,12 @@
                   </HBox>
                   <HBox>
                      <children>
-                        <Label minWidth="80.0" text="Text">
+                        <Label minWidth="100.0" text="Syfte">
                            <HBox.margin>
                               <Insets bottom="3.0" left="3.0" right="3.0" top="6.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="textField2" onKeyReleased="#onEditSpecs">
+                        <TextField fx:id="syfteField" disable="true" editable="false" prefWidth="250.0">
                            <HBox.margin>
                               <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                            </HBox.margin>
@@ -154,12 +204,12 @@
                   </HBox>
                   <HBox>
                      <children>
-                        <Label minWidth="80.0" text="Syfte">
+                        <Label minWidth="100.0" text="Kurs/Program">
                            <HBox.margin>
                               <Insets bottom="3.0" left="3.0" right="3.0" top="6.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="syfteField" editable="false">
+                        <TextField fx:id="kursProgramField" disable="true" editable="false" prefWidth="250.0">
                            <HBox.margin>
                               <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                            </HBox.margin>
@@ -168,12 +218,12 @@
                   </HBox>
                   <HBox>
                      <children>
-                        <Label minWidth="80.0" text="Kurs/Program">
+                        <Label minWidth="100.0" text="Kund">
                            <HBox.margin>
                               <Insets bottom="3.0" left="3.0" right="3.0" top="6.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="kursProgramField" editable="false">
+                        <TextField fx:id="kundField" disable="true" editable="false" prefWidth="250.0">
                            <HBox.margin>
                               <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                            </HBox.margin>
@@ -182,26 +232,12 @@
                   </HBox>
                   <HBox>
                      <children>
-                        <Label minWidth="80.0" text="Kund">
+                        <Label minWidth="100.0" text="Utrustning">
                            <HBox.margin>
                               <Insets bottom="3.0" left="3.0" right="3.0" top="6.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="kundField" editable="false">
-                           <HBox.margin>
-                              <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
-                           </HBox.margin>
-                        </TextField>
-                     </children>
-                  </HBox>
-                  <HBox>
-                     <children>
-                        <Label minWidth="80.0" text="Utrustning">
-                           <HBox.margin>
-                              <Insets bottom="3.0" left="3.0" right="3.0" top="6.0" />
-                           </HBox.margin>
-                        </Label>
-                        <TextField fx:id="utrustningField" editable="false">
+                        <TextField fx:id="utrustningField" disable="true" editable="false" prefWidth="250.0">
                            <HBox.margin>
                               <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                            </HBox.margin>
@@ -214,12 +250,7 @@
       </HBox>
       <HBox>
          <children>
-            <Button fx:id="backButton" mnemonicParsing="false" onAction="#backToStart" text="Tillbaka">
-               <HBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveEvent" text="Spara">
+            <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveEvent" text="Skicka till Canvas">
                <HBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </HBox.margin>

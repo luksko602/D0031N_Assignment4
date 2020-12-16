@@ -15,16 +15,20 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ *Kontroller för activeMQ scenen, (avstängd i denna verision)
+ * @author Lukas Skog Andersen, luksok-8
+ */
 public class FXMLController implements Initializable {
-    
+
     @FXML
     private TextField messageTextField;
     @FXML
     private TextField queueTextField;
-    
+
     @FXML
     public void sendButtonAction(ActionEvent event) {
-   /*  try{
+        /*  try{
         new JmsAmqManager().produce(queueTextField.getText(), messageTextField.getText());
         queueTextField.setText("");
         messageTextField.setText("");
@@ -32,10 +36,10 @@ public class FXMLController implements Initializable {
          System.out.println(e);
      }*/
     }
-    
+
     @FXML
-    public void getButtonAction(ActionEvent event){
-  /*      try{
+    public void getButtonAction(ActionEvent event) {
+        /*      try{
             String message = new JmsAmqManager().consume(queueTextField.getText());
             messageTextField.setText(message);
             queueTextField.setText("");
@@ -43,15 +47,15 @@ public class FXMLController implements Initializable {
             System.out.println(e);
         }*/
     }
-    
+
     @FXML
-    public void startCalendar(ActionEvent event) throws IOException{
+    public void startCalendar(ActionEvent event) throws IOException {
         Parent calendarViewParent = FXMLLoader.load(getClass().getResource("/fxml/CalendarScene.fxml"));
         Scene calendarViewScene = new Scene(calendarViewParent);
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(calendarViewScene);
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

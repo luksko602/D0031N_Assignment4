@@ -3,8 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package MessageController;
+
 /*
 import java.util.concurrent.TimeUnit;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
@@ -20,7 +20,7 @@ import javax.jms.MessageProducer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 import org.apache.activemq.ActiveMQConnectionFactory;
-*/
+ */
 /**
  *
  * @author Lukas
@@ -99,5 +99,5 @@ public class JmsAmqManager //implements MessageListener
             System.out.println(e);
         }
     }
-*/
+     */
 }

@@ -1,56 +1,61 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
 import java.util.List;
 
 /**
- *
- * @author Lukas
+ *Klass som motsvarar ett kalenderevent
+ * @author Lukas Skog Andersen, luksok-8
  */
 public class Reservation {
-       private String id;
+
+    private String id;
     private String startdate;
     private String starttime;
     private String enddate;
     private String endtime;
     private List<String> columns;
 
-    public String toString(){
-        String res = "ID: " + id + " \nStartdatum:" + startdate + "\nStarttid:" + starttime 
+    /**
+     * Returnerar all information om eventet
+     *
+     * @return All information om eventet
+     */
+    public String toString() {
+        String res = "ID: " + id + " \nStartdatum:" + startdate + "\nStarttid:" + starttime
                 + "\nSlutdatum:" + enddate + "\nSluttid:" + endtime + columns;
         int count = 0;
-        for (String s: columns){        
-            res += "\n" +count +": "+ s;
+        for (String s : columns) {
+            res += "\n" + count + ": " + s;
             count++;
         }
         return res;
     }
-    
-    public String getEventInfo(){
-         String res = "ID: " + id + "\nStartdatum:" + startdate + "\nStarttid:" + starttime 
+
+    /**
+     * Returnerar endast den huvudsakliga informationen
+     *
+     * @return Huvudsaklig information
+     */
+    public String getEventInfo() {
+        String res = "ID: " + id + "\nStartdatum:" + startdate + "\nStarttid:" + starttime
                 + "\nSlutdatum:" + enddate + "\nSluttid:" + endtime;
-        return res;   
+        return res;
     }
-    
-       public String getEventSpec(){
+
+    /**
+     * Returnerar endast specifikationerna om eventet
+     *
+     * @return specifik information
+     */
+    public String getEventSpec() {
         String res = "";
-        for (String s: columns){        
+        for (String s : columns) {
             res += s;
         }
-        return res;   
+        return res;
     }
 
-    public void setColumns(List<String> columns) {
-        this.columns = columns;
-    }
-
-    public List<String> getColumns() {
-        return columns;
-    }
+    //--------------Getters och Setters
     
     public void setId(String id) {
         this.id = id;
@@ -76,8 +81,36 @@ public class Reservation {
         return id;
     }
 
+    public void setColumns(List<String> columns) {
+        this.columns = columns;
+    }
+
+    public List<String> getColumns() {
+        return columns;
+    }
+
     public String getStartdate() {
         return startdate;
+    }
+    //----------------
+    public String getAktivitet(){
+        return columns.get(3);
+    }
+    
+    public String getLokal(){
+        return columns.get(1);
+    }
+        
+    public String getCampus(){
+        return columns.get(5);
+    }
+     
+    public String getText1(){
+        return columns.get(6);
+    }
+    
+    public String getText2(){
+        return columns.get(7);
     }
 
     public String getStarttime() {
@@ -90,33 +123,5 @@ public class Reservation {
 
     public String getEndtime() {
         return endtime;
-    }
-    
-    public String getLokal(){
-        return columns.get(1);
-    }
-    
-    public String getLarare(){
-        return columns.get(2);
-    }
-    
-    public String getAktivitet(){
-        return columns.get(3);
-    }
-    
-    public String getKurs(){
-        return columns.get(1);
-    }
-    
-    public String getCampus(){
-        return columns.get(1);
-    }
-    
-    public String getService(){
-        return columns.get(1);
-    }
-    
-    public String getText1(){
-        return columns.get(1);
     }
 }

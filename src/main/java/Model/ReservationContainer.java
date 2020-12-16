@@ -9,11 +9,11 @@ import Model.Reservation;
 import java.util.List;
 
 /**
- *
- * @author Lukas
+ * Container för reservationer. Innehåller endast getters och setter
+ * @author Lukas Skog Andersen, luksok-8
  */
 public class ReservationContainer {
-        private List<Reservation> reservations;
+    private List<Reservation> reservations;
 
     public void setReservations(List<Reservation> reservations) {
         this.reservations = reservations;
@@ -22,16 +22,17 @@ public class ReservationContainer {
     public List<Reservation> getReservations() {
         return reservations;
     }
-    
-    public Reservation getReservationByID(String id){
-        for(Reservation res: reservations){
-         if(res.getId().equals(id)){
-             return res;
+
+    public Reservation getReservationByID(String id) {
+        for (Reservation res : reservations) {
+            if (res.getId().equals(id)) {
+                return res;
             }
         }
         return null;
     }
-    public Reservation getReservationByIndex(int index){
+
+    public Reservation getReservationByIndex(int index) {
         return reservations.get(index);
     }
 }

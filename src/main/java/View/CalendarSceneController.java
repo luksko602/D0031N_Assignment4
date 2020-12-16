@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package View;
 
 import RESTController.RESTConnectionTimeEdit;
@@ -43,7 +38,7 @@ import javafx.util.Callback;
 /**
  * FXML Controller class
  *
- * @author Lukas
+ * @author Lukas Skog Andersen, luksok-8
  */
 public class CalendarSceneController implements Initializable {
 
@@ -90,6 +85,12 @@ public class CalendarSceneController implements Initializable {
     @FXML
     private ListView calendarList;
 
+    /**
+     * Funktion som startar ActiveMQ sidan (ej längre aktiv)
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void backToStart(ActionEvent event) throws IOException {
         Parent calendarViewParent = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
@@ -98,39 +99,53 @@ public class CalendarSceneController implements Initializable {
         window.setScene(calendarViewScene);
     }
 
+    /**
+     * Hanterar anropet till TimeEdit för att hämta schemat
+     *
+     * @param event
+     */
     @FXML
     public void getCalendarList(ActionEvent event) {
         try {
+            //Skapar en connection till TimeEdit med den akutella kursen
             conTimeEdit = new RESTConnectionTimeEdit(courseCodeField.getText(),
-                     startDate.getValue().toString().replaceAll("-", ""),
-                     endDate.getValue().toString().replaceAll("-", "")
+                    //Trimmar datumen för att passa i anropet
+                    startDate.getValue().toString().replaceAll("-", ""),
+                    endDate.getValue().toString().replaceAll("-", "")
             );
             rc = conTimeEdit.getAllAsJson();
+            //Laddar listan med aktuell kursdata
             loadCourseData(rc);
         } catch (Exception ex) {
             clearAllFields();
             calendarList.getItems().clear();
-            
-            alertWindow("Varning!", "Det gick inte att hämta schemat!", "Kontrollera fälten och försök igen.");
-//            Alert alert = new Alert(AlertType.ERROR);
-//            alert.setTitle("Varning!");
-//            alert.setHeaderText("Det gick inte att hämta schemat!");
-//            alert.setContentText("Kontrollera fälten och försök igen.");
-//            System.out.println(ex);
-//            alert.showAndWait();
+            //pop-up om något gick fel
+            alertWindow("Varning!", "Det gick inte att hämta schemat!",
+                    "Kontrollera fälten och försök igen.");
         }
     }
 
+    /**
+     * Sätter datan i listan för den aktuella kursen
+     *
+     * @param rc
+     */
     public void loadCourseData(ReservationContainer rc) {
         courseList.removeAll(courseList);
         for (Reservation res : rc.getReservations()) {
             courseList.add(res.getEventInfo());
         }
         calendarList.getItems().clear();
+        //Tömmer alla textfält
         clearAllFields();
         calendarList.getItems().addAll(courseList);
     }
 
+    /**
+     * Sätter informationen i textfälten för det valda eventet i listan
+     *
+     * @param event
+     */
     @FXML
     private void displaySelected(MouseEvent event) {
         try {
@@ -154,6 +169,9 @@ public class CalendarSceneController implements Initializable {
         }
     }
 
+    /**
+     * Tömmer alla textfields
+     */
     private void clearAllFields() {
         lokalField.clear();
         larareField.clear();
@@ -168,102 +186,56 @@ public class CalendarSceneController implements Initializable {
         utrustningField.clear();
     }
 
+    /**
+     * Hanterar pushen av event till Canvas
+     *
+     * @param event
+     */
     @FXML
     private void saveEvent(ActionEvent event) {
+        //Hämtar vilken person(eller kurs) som eventen ska pushas till
         String input = dialogWindow("Push till Canvas", "Vilken kurs vill du pusha till:", "Kurs:");
         if (input != null && input.length() != 0) {
+            //Hämtar alla valda event
             ObservableList selected = calendarList.getSelectionModel().getSelectedIndices();
-            List<Reservation> success = new ArrayList();
-            List<Reservation> failed = new ArrayList();
+            //Strängar med lyckade och failade pushningar
+            String pushed = "";
+            String error = "";
             for (Object i : selected) {
                 Reservation res = rc.getReservationByIndex((int) i);
+                //Skickar en förfrågan till Canvas
                 int status = conCanvas.postCaldendar(
                         //Lukas = 72164
                         "user_" + input,
                         res.getAktivitet(),
                         res.getStartdate() + "T" + res.getStarttime() + "Z",
                         res.getEnddate() + "T" + res.getEndtime() + "Z",
-                        lokalField.getText(),
-                        campusField.getText(),
-                        textField1.getText() + " " + textField2.getText()
+                        res.getLokal(),
+                        res.getCampus(),
+                        res.getText1() + " " + res.getText2()
                 );
+                //Om eventet är lyckat postat
                 if (status == 201) {
-                    success.add(res);
+                    pushed += "\n" + res.getId();
+                    //Om eventet inte lyckades pushas
                 } else {
-                    failed.add(res);
+                    error += "\n" + res.getId();
                 }
             }
-            String pushed = "";
-            String error = "";
-            for(Reservation res: success){
-                pushed += "\n" + res.getId();
-            }
-            for(Reservation res: failed){
-                error += "\n" + res.getId();
-            }
-            infoWindow("Resultat av push"
-                    ,"Event pushade: " + pushed + "\nEvent ej pushade: " + error );
-            
+            //Visar reslutat av pushen
+            infoWindow("Resultat av push",
+                    "Event pushade: " + pushed + "\nEvent ej pushade: " + error);
+
         } else {
             alertWindow("Varning", "Något blev fel!", "Fel vid inmatning. Vänligen försök igen.");
         }
     }
 
-    private void alertWindow(String title, String header, String content) {
-        
-        Alert alert = new Alert(AlertType.WARNING);
-        
-        DialogPane dialogPane = alert.getDialogPane();
-        dialogPane.getStylesheets().add(
-        getClass().getResource("/styles/Styles.css").toExternalForm());
-        dialogPane.getStyleClass().add("myDialog"); 
-            
-        alert.setTitle(title);
-        alert.setHeaderText(header);
-        alert.setContentText(content);
-        alert.showAndWait();
-    }
-    
-    private String dialogWindow(String title, String header, String content){
-        TextInputDialog dialog = new TextInputDialog("72164");
-        
-         DialogPane dialogPane = dialog.getDialogPane();
-        dialogPane.getStylesheets().add(
-        getClass().getResource("/styles/Styles.css").toExternalForm());
-        dialogPane.getStyleClass().add("myDialog"); 
-        
-        dialog.setTitle(title);
-        dialog.setHeaderText(header);
-        dialog.setContentText(content);
-        dialog.setGraphic(null);
-        Optional<String> result = dialog.showAndWait();
-        TextField input = dialog.getEditor();
-        return input.getText().toString();
-    }
-    
-    private void infoWindow(String title, String text){
-        Alert alert = new Alert(AlertType.INFORMATION);
-        
-        DialogPane dialogPane = alert.getDialogPane();
-        dialogPane.getStylesheets().add(
-        getClass().getResource("/styles/Styles.css").toExternalForm());
-        dialogPane.getStyleClass().add("myDialog"); 
-        
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(text);
-        alert.showAndWait();
-    }
-
     /**
-     * Initializes the controller class.
+     * Aktiveras varje gång ett textfield ändras.
+     *
+     * @param event
      */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        calendarList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        
-    }
-
     @FXML
     private void onEditSpecs(KeyEvent event) {
         List<String> specs = new ArrayList();
@@ -283,5 +255,82 @@ public class CalendarSceneController implements Initializable {
 
         int index = calendarList.getSelectionModel().getSelectedIndex();
         rc.getReservationByIndex(index).setColumns(specs);
+    }
+
+    //---------POP-UP WINDOWS---------------------
+    /**
+     * Startar ett varningsfönster
+     *
+     * @param title
+     * @param header
+     * @param content
+     */
+    private void alertWindow(String title, String header, String content) {
+
+        Alert alert = new Alert(AlertType.WARNING);
+
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(
+                getClass().getResource("/styles/Styles.css").toExternalForm());
+        dialogPane.getStyleClass().add("myDialog");
+
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
+    /**
+     * Startar ett dialogfönster som tar emot input och returnerar det
+     *
+     * @param title
+     * @param header
+     * @param content
+     * @return inskrivet värde
+     */
+    private String dialogWindow(String title, String header, String content) {
+        TextInputDialog dialog = new TextInputDialog("72164");
+
+        DialogPane dialogPane = dialog.getDialogPane();
+        dialogPane.getStylesheets().add(
+                getClass().getResource("/styles/Styles.css").toExternalForm());
+        dialogPane.getStyleClass().add("myDialog");
+
+        dialog.setTitle(title);
+        dialog.setHeaderText(header);
+        dialog.setContentText(content);
+        dialog.setGraphic(null);
+        Optional<String> result = dialog.showAndWait();
+        TextField input = dialog.getEditor();
+        return input.getText().toString();
+    }
+
+    /**
+     * Skapar ett informationsfönster
+     *
+     * @param title
+     * @param text
+     */
+    private void infoWindow(String title, String text) {
+        Alert alert = new Alert(AlertType.INFORMATION);
+
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(
+                getClass().getResource("/styles/Styles.css").toExternalForm());
+        dialogPane.getStyleClass().add("myDialog");
+
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(text);
+        alert.showAndWait();
+    }
+
+    /**
+     * Startar kontrollklassen
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        calendarList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
     }
 }
